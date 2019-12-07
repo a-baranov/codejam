@@ -15,8 +15,13 @@ fun main() {
             val f = s.nextInt()
             val pattern = createPattern(n, b)
             val response = s.sendPattern(pattern, n, b)
+            val locations = analyze(response, n, b)
         }
     }
+}
+
+fun analyze(response: BitSet, n: Int, b: Int): List<BrokenWorkerLocation> {
+    return listOf()
 }
 
 fun Scanner.sendPattern(pattern: BitSet, n: Int, b: Int): BitSet {
@@ -38,7 +43,7 @@ fun Scanner.sendPattern(pattern: BitSet, n: Int, b: Int): BitSet {
     return result
 }
 
-data class BrokenWorkerLocations(val range: IntRange, val number: Int)
+data class BrokenWorkerLocation(val range: IntRange, val number: Int)
 
 fun createPattern(n: Int, b: Int): BitSet {
     val pattern = BitSet(n)
