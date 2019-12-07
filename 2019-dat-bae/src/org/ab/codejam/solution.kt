@@ -1,5 +1,7 @@
 package org.ab.codejam
 
+import java.lang.RuntimeException
+import java.math.BigInteger
 import java.util.*
 import kotlin.math.min
 
@@ -12,9 +14,28 @@ fun main() {
             val b = s.nextInt()
             val f = s.nextInt()
             val pattern = createPattern(n, b)
-            println(pattern.toBinaryString(n))
+            val response = s.sendPattern(pattern, n, b)
         }
     }
+}
+
+fun Scanner.sendPattern(pattern: BitSet, n: Int, b: Int): BitSet {
+    println(pattern.toBinaryString(n))
+    var line: String
+    do {
+        line = nextLine()
+    } while (line.trim().isEmpty())
+    if (line == "-1") {
+        throw RuntimeException()
+    }
+    val result = BitSet(n - b)
+    assert(line.length == n - b)
+    for ((i, char) in line.withIndex()) {
+        if (char == '1') {
+            result.set(i)
+        }
+    }
+    return result
 }
 
 data class BrokenWorkerLocations(val range: IntRange, val number: Int)
